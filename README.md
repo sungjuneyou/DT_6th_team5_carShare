@@ -1,4 +1,4 @@
-# DT_6th_team5_carShare (자동차 공유 서비스)
+# DT_6th_team5_carShare (자동차 공유 서비스) - 개인과제 추가
 
 5팀 자동차 공유 서비스 CNA개발 실습을 위한 프로젝트
 
@@ -8,7 +8,7 @@
  1. 배송관리 : https://github.com/YoungDukGe1000Won/carShareDelivery.git
  1. 고객페이지 : https://github.com/YoungDukGe1000Won/carShareStatusview.git
  1. 게이트웨이 : https://github.com/YoungDukGe1000Won/carShareGateway.git
-
+ 1. 
 
 # Table of contents
 
