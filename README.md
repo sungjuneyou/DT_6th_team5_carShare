@@ -194,10 +194,12 @@ spring:
 
 ## 폴리글랏 퍼시스턴스
 
-CQRS 를 위한 customerpage 서비스만 DB를 구분하여 적용함. 인메모리 DB인 hsqldb 사용.
+CQRS 를 위한 order 서비스 DB를 구분하여 적용함. 인메모리 DB인 hsqldb 사용.
 
 ```
 pom.xml 에 적용
+![image](https://user-images.githubusercontent.com/47113630/96830909-1de2d200-1477-11eb-9bba-3007a5c38aff.png)
+
 <!-- 
 		<dependency>
 			<groupId>com.h2database</groupId>
