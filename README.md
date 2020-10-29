@@ -115,20 +115,20 @@
 ![image](https://user-images.githubusercontent.com/47113630/97525356-f4332900-19e9-11eb-9580-da8c2a58f6c5.png)
 
 ### 완성본에 대한 기능적 요구사항을 커버하는지 검증
-![제목 없음12](https://user-images.githubusercontent.com/42608068/96543922-72077e00-12e0-11eb-91bf-ae6aaf5e8fbb.png)
-    
+![image](https://user-images.githubusercontent.com/47113630/97540925-aaf1d200-1a07-11eb-8af8-250945f04748.png)
+  
     - 고객이 공유차를 선택하여 렌탈한다 (ok)
     - 고객이 결제하여 접수한다 (ok)
     - 업체가 공유차를 고객위치로 가져다놓는다 (ok)
     - [개인과제] 배송이 시작되면 포인트를 추가한다. (ok)
 
-![제목 없음13](https://user-images.githubusercontent.com/42608068/96543936-79c72280-12e0-11eb-98a2-0c67478f6926.png)
+![image](https://user-images.githubusercontent.com/47113630/97541009-ca88fa80-1a07-11eb-8a7f-a295bdbafb41.png)
 
     - 고객이 주문을 취소할 수 있다 (ok)
     - 렌탈이 취소되면 배송이 취소된다 (ok)
     - [개인과제] 배송이 취소되면 포인트를 차감한다. (ok)
 
-![제목 없음14](https://user-images.githubusercontent.com/42608068/96543997-9cf1d200-12e0-11eb-9a71-9aa743f7de44.png)
+![image](https://user-images.githubusercontent.com/47113630/97541212-1fc50c00-1a08-11eb-9c73-83bee61cf8f2.png)
    
     - 고객이 자신의 렌탈 정보를 조회한다 (ok)
     
