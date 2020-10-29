@@ -146,8 +146,8 @@
 ![제목없음21](https://user-images.githubusercontent.com/42608068/96549943-260e0680-12eb-11eb-8119-394cb324883d.png)
 
 [개인과제]
- Order의 DB를 변경하여 구현함.
-
+ Point 퍼시스턴트에 대한 처리를 위해 리스너와 어뎁터 그리고 데이터처리를 위한 JPA 카프카 퍼블리셔를 설치하였다.
+![image](https://user-images.githubusercontent.com/47113630/97534414-49c50100-19fd-11eb-977d-ce312487585a.png)
 ![image](https://user-images.githubusercontent.com/47113630/96831290-c002ba00-1477-11eb-8bb2-d425f8b0f697.png)
 
     - Chris Richardson, MSA Patterns 참고하여 Inbound adaptor와 Outbound adaptor를 구분함
