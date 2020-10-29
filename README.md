@@ -149,7 +149,7 @@
 
 [개인과제]
  Point 퍼시스턴트에 대한 처리를 위해 리스너와 어뎁터 그리고 데이터처리를 위한 JPA 카프카 퍼블리셔를 설치하였다.
-![image](https://user-images.githubusercontent.com/47113630/96831290-c002ba00-1477-11eb-8bb2-d425f8b0f697.png)
+![image](https://user-images.githubusercontent.com/47113630/97534414-49c50100-19fd-11eb-977d-ce312487585a.png)
 
     - Chris Richardson, MSA Patterns 참고하여 Inbound adaptor와 Outbound adaptor를 구분함
     - 호출관계에서 PubSub 과 Req/Resp 를 구분함
