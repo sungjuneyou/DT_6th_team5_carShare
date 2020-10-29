@@ -213,6 +213,7 @@ spring:
 ## 폴리글랏 퍼시스턴스
 
 CQRS 를 위한 point 도메인 DB를 구분하여 적용함. 인메모리 DB인 hsqldb 사용.
+![image](https://user-images.githubusercontent.com/47113630/96830909-1de2d200-1477-11eb-9bba-3007a5c38aff.png)
 
 ```
 pom.xml 에 적용
