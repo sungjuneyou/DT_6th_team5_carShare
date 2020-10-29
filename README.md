@@ -1,9 +1,10 @@
-# DT_6th_team5_carShare (자동차 공유 서비스) - 개인과제 추가
+# carShare_team5- (자동차 공유 서비스) - 개인과제
 
-5팀 자동차 공유 서비스 CNA개발 실습을 위한 프로젝트
+자동차 공유 서비스 CNA개발 실습을 위한 프로젝트
 
 [개인과제 도출]
-접수관리에 Order수량 변경을 위해 접수, 결재, 배송 aggrigate에 대한 커맨드, 이벤트, Policy, pub/sub, req/res 적용 후
+접수관리에 Order수량 변경을 위한 기능 추가
+접수, 결재, 배송 aggrigate에 대한 커맨드, 이벤트, Policy, pub/sub, req/res 적용 후
 해당하는 서비스의 부하에 따라 MSA패턴으로 개발을 진행한다.
 
 # 구현 Repository
