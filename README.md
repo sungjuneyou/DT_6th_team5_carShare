@@ -150,7 +150,7 @@
 ![제목없음21](https://user-images.githubusercontent.com/42608068/96549943-260e0680-12eb-11eb-8119-394cb324883d.png)
 
 [개인과제]
- Point 퍼시스턴트에 대한 처리를 위해 리스너와 어뎁터 그리고 데이터처리를 위한 JPA 카프카 퍼블리셔를 설치하였다.
+ Point 퍼시스턴트에 대한 처리를 위해 데이터처리를 위해 JPA, 카프카 퍼블리셔를 설치하였다.
 ![image](https://user-images.githubusercontent.com/47113630/97534414-49c50100-19fd-11eb-977d-ce312487585a.png)
 
     - Chris Richardson, MSA Patterns 참고하여 Inbound adaptor와 Outbound adaptor를 구분함
@@ -213,12 +213,11 @@ spring:
 ## 폴리글랏 퍼시스턴스
 
 CQRS 를 위한 point 도메인 DB를 구분하여 적용함. 인메모리 DB인 hsqldb 사용.
-![image](https://user-images.githubusercontent.com/47113630/96830909-1de2d200-1477-11eb-9bba-3007a5c38aff.png)
 
-```
 pom.xml 에 적용
 ![image](https://user-images.githubusercontent.com/47113630/96830909-1de2d200-1477-11eb-9bba-3007a5c38aff.png)
 
+```
 <!-- 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -238,6 +237,7 @@ pom.xml 에 적용
 ## 동기식 호출 과 Fallback 처리
 
 분석단계에서의 조건 중 하나로 접수(order)->결제(payment) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 이미 앞서 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다.
+
 - FeignClient 서비스 구현
 
 ```
