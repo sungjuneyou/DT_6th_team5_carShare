@@ -3,7 +3,7 @@
 자동차 공유 서비스 CNA개발 실습을 위한 프로젝트
 
 [개인과제 도출]
-배송관리 이벤트에 따라 배송 메시지를 발송하고 발송이력을 관리한다.
+배송관리 이벤트에 따라 배송 메시지를 발송하고 이력을 관리한다.
 
 
 # 구현 Repository
@@ -77,6 +77,7 @@
 
 ## 이벤트스토밍 - 개인과제 추가
 ![image](https://user-images.githubusercontent.com/47113630/96699312-15cc5900-13c9-11eb-9141-deb40b9fa72b.png)
+![image](https://user-images.githubusercontent.com/47113630/97522983-6bfe5500-19e4-11eb-9599-fd2a49cee775.png)
 
 ### 이벤트 도출 
 ![제목 없음1](https://user-images.githubusercontent.com/42608068/96541160-60bb7300-12da-11eb-8eda-4beb637fa24f.png)
