@@ -66,14 +66,11 @@
 
 
 ## TO-BE 조직 (Vertically-Aligned)
-![제목 없음23](https://user-images.githubusercontent.com/42608068/96586618-34284b00-131c-11eb-89b0-707eaa8eae82.png)
-
+![image](https://user-images.githubusercontent.com/47113630/97524717-b1248600-19e8-11eb-8268-690b9d982389.png)
 
 ## 이벤트스토밍
 * MSAEz 로 모델링한 이벤트스토밍 결과:  
 ![image](https://user-images.githubusercontent.com/42608068/96539757-c9085580-12d6-11eb-8721-8bb7e0601d53.png)
-
-
 
 ## 이벤트스토밍 - 개인과제 추가
 ![image](https://user-images.githubusercontent.com/47113630/97523247-15454b00-19e5-11eb-92dd-146bc0e279a0.png)
