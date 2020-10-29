@@ -136,13 +136,15 @@
 ![제목없음22](https://user-images.githubusercontent.com/42608068/96582783-c2013780-1316-11eb-8bfc-dba64c7af837.png)
 
     1. 트랜잭션
-    - 고객의 주문에 따라 결제가 진행된다(결제가 정상적으로 완료되지 않으면 주문이 되지 않는다) > Sync
-    - 고객의 결제 완료에 따라 배송이 진행된다 > Async
+    - [개인과제] 포인트 차감이 되지 않은 배송취소는 성립되지 않아야 한다(Sync 호출)
+    - [개인과제] 포인트관리 기능이 수행되지 않더라도 배송처리는 정상적으로 가능하다(Async(event-driven), Eventual Consistency)
+    
     2. 장애격리
-    - 배송 서비스에 장애가 발생하더라도 주문 및 결제는 정상적으로 처리 가능하다 > Async(event driven)
-    - 서킷 브레이킹 프레임워크 > istio-injection + DestinationRule
+    - [개인과제] 포인트관리 기능이 수행되지 않더라도 배송처리는 정상적으로 가능하다(Async(event-driven), Eventual Consistency)
+    - [개인과제] 포인트관리 시스템이 과중되면 사용자를 잠시동안 받지 않고 잠시후에 주문취소처리 하도록 유도한다(Circuit breaker, fallback)
+    서킷 브레이킹 프레임워크 > istio-injection + DestinationRule
     3. 성능
-    - 고객은 본인의 상태 정보를 확인할 수 있다 > CQRS
+    - [개인과제] 포인트의 현재 상태는 조회를 위한 접수시스템에서 확인할 수 있어야 한다(CQRS)
 
 ## 헥사고날 아키텍처 다이어그램 도출
 ![제목없음21](https://user-images.githubusercontent.com/42608068/96549943-260e0680-12eb-11eb-8119-394cb324883d.png)
