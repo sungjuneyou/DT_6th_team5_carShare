@@ -177,6 +177,7 @@
 | delivery | 배송 관리 | 8082 | http://localhost:8082/deliveries | http://carsharedelivery:8080/deliveries |
 | customerpage | 상태 조회 | 8083 | http://localhost:8083/customerpages | http://carsharestatusview:8080/customerpages |
 | payment | 결제 관리 | 8084 | http://localhost:8084/payments | http://carsharepayment:8080/payments |
+| point | 포인트 관리 | 8085 | http://localhost:8085/points | http://carsharepayment:8080/points |
 
 ## Gateway 적용
 
@@ -202,12 +203,16 @@ spring:
           uri: http://carsharepayment:8080
           predicates:
             - Path=/payments/**,/paymentCancellations/**
+        - id: point
+          uri: http://carsharepayment:8080
+          predicates:
+            - Path=/points/**,/pointCancellations/**
 ```
 
 
 ## 폴리글랏 퍼시스턴스
 
-CQRS 를 위한 order 서비스 DB를 구분하여 적용함. 인메모리 DB인 hsqldb 사용.
+CQRS 를 위한 point 도메인 DB를 구분하여 적용함. 인메모리 DB인 hsqldb 사용.
 
 ```
 pom.xml 에 적용
