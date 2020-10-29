@@ -106,6 +106,10 @@
 ### 완성된 모형
 ![제목 없음11](https://user-images.githubusercontent.com/42608068/96543764-0b826000-12e0-11eb-9296-112459a6027b.png)
 
+### [개인과제] 완성된 모형
+![image](https://user-images.githubusercontent.com/47113630/97525356-f4332900-19e9-11eb-9580-da8c2a58f6c5.png)
+
+![image](https://user-images.githubusercontent.com/47113630/97525356-f4332900-19e9-11eb-9580-da8c2a58f6c5.png)
 ### 완성본에 대한 기능적 요구사항을 커버하는지 검증
 ![제목 없음12](https://user-images.githubusercontent.com/42608068/96543922-72077e00-12e0-11eb-91bf-ae6aaf5e8fbb.png)
     
