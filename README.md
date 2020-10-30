@@ -167,6 +167,12 @@
 | 4.고객이 공유차 렌탈을 취소한다.</br>8. 포인트 취소가 정상적으로 완료되면 배송 취소가 진행된다. (Sync)</br>5. 배송 취소가 정상적으로 완료되면 결제 취소가 진행된다. (Sync)</br>6.결제 취소도 정상적으로 이어지면 접수가 최종적으로 취소된다. (Async)|![제목없음21](https://user-images.githubusercontent.com/42608068/96580830-d7289700-1313-11eb-985b-aa1036db3e57.png)|
 | 7.고객이 접수 상태를 조회한다.|![제목없음21](https://user-images.githubusercontent.com/42608068/96581350-a5640000-1314-11eb-8336-0474e2d1716b.png)|
 
+![image](https://user-images.githubusercontent.com/47113630/97678137-b19b4a80-1ad6-11eb-9ce5-6967a102cc08.png)
+
+
+![image](https://user-images.githubusercontent.com/47113630/97678324-f9ba6d00-1ad6-11eb-8389-f67fe7786b7b.png)
+
+
 ## DDD 의 적용
 분석/설계 단계에서 도출된 MSA는 총 5개로 아래와 같다.
 * customerpage 는 CQRS 를 위한 서비스
