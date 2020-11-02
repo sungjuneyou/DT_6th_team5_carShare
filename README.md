@@ -59,7 +59,7 @@
     1. 배송관리 기능이 수행되지 않더라도 접수는 정상적으로 처리 가능하다(Async(event-driven), Eventual Consistency)
     1. 접수시스템이 과중되면 사용자를 잠시동안 받지 않고 결제를 잠시후에 하도록 유도한다(Circuit breaker, fallback)
     1. [개인과제] 포인트관리 기능이 수행되지 않더라도 배송처리는 정상적으로 가능하다(Async(event-driven), Eventual Consistency)
-    1. [개인과제] 포인트관리 시스템이 과중되면 사용자를 잠시동안 받지 않고 잠시후에 쿠폰을 발행하도록 유도한다(Circuit breaker, fallback)
+    1. [개인과제] 포인트관리 시스템이 과중되면 사용자를 잠시동안 받지 않고 잠시후에 포인트를 발행하도록 유도한다(Circuit breaker, fallback)
 
 1. 성능을 고려한 설계
     1. 고객이 본인의 렌탈 상태 및 이력을 접수시스템에서 확인할 수 있어야 한다(CQRS)
@@ -241,13 +241,13 @@ pom.xml 에 적용
 - FeignClient 서비스 구현
 
 ```
-# PaymentService.java
+# PaymentCancellationService.java
 
-@FeignClient(name="payment", contextId ="payment", url="${api.payment.url}", fallback = PaymentServiceFallback.class)
-public interface PaymentService {
+@FeignClient(name="paymentcancel", contextId ="payment", fallback = PaymentServiceFallback.class)
+public interface PaymentCancellationService {
 
-    @RequestMapping(method= RequestMethod.POST, path="/payments")
-    public void pay(@RequestBody Payment payment);
+    @RequestMapping(method= RequestMethod.POST, path="/paymentCancellations")
+    public void paycancel(@RequestBody PaymentCancellation paymentCancellation);
 
 }
 ```
@@ -255,19 +255,23 @@ public interface PaymentService {
 ```
 # Order.java (Entity)
 
-    @PostPersist
-    public void onPostPersist(){
-        Ordered ordered = new Ordered();
-        BeanUtils.copyProperties(this, ordered);
-        ordered.publishAfterCommit();
+    @PreRemove
+    public void onPreRemove(){
+        OrderCancelled orderCancelled = new OrderCancelled();
+        BeanUtils.copyProperties(this, orderCancelled);
+        orderCancelled.publishAfterCommit();
 
-        carshare.external.Payment payment = new carshare.external.Payment();
-        payment.setOrderId(this.getId());
-        payment.setProductId(this.getProductId());
-        payment.setQty(this.getQty());
-        payment.setStatus("OrderApproved");
-        OrderApplication.applicationContext.getBean(carshare.external.PaymentService.class)
-            .pay(payment);
+        //Following code causes dependency to external APIs
+        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+
+        carshare.external.PaymentCancellation paymentCancellation = new carshare.external.PaymentCancellation();
+        // mappings goes here
+        paymentCancellation.setOrderId(this.getId());
+        paymentCancellation.setProductId(this.getProductId());
+        paymentCancellation.setQty(this.getQty());
+        paymentCancellation.setStatus("orderCancel");
+        OrderApplication.applicationContext.getBean(carshare.external.PaymentCancellationService.class)
+            .paycancel(paymentCancellation);
     }
 ```
 
@@ -295,27 +299,23 @@ http localhost:8081/orders productId=1002 qty=3 status="order"   #Success
 
 ## 비동기식 호출 / 시간적 디커플링 / 장애격리 / 최종 (Eventual) 일관성 테스트
 
-결제가 이루어진 후에 배송 서비스로 이를 알려주는 행위는 동기식이 아니라 비동기식으로 처리하여 배송 시스템의 처리를 위해 결제가 블로킹되지 않도록 처리한다.
+배송이 이루어진 후에 포인트 서비스로 이를 알려주는 행위는 동기식이 아니라 비동기식으로 처리하여 포인트 시스템의 처리를 위해 배송처리가 블로킹되지 않도록 처리한다.
  
-- 이를 위하여 결제이력 기록을 남긴 후에 곧바로 결제승인이 되었다는 도메인 이벤트를 카프카로 송출한다(Publish)
+- 이를 위하여 배송이력 기록을 남긴 후에 곧바로 배송이 되었다는 도메인 이벤트를 카프카로 송출한다(Publish)
  
 ```
 package carshare;
 
-@Entity
-@Table(name="Payment_table")
-public class Payment {
-
- ...
     @PostPersist
     public void onPostPersist(){
-        Paid paid = new Paid();
-        BeanUtils.copyProperties(this, paid);
-        paid.publishAfterCommit();    
+        Shipped shipped = new Shipped();
+        BeanUtils.copyProperties(this, shipped);
+        shipped.publishAfterCommit();
+
+
     }
-}
 ```
-- 배송 서비스에서는 결제승인 이벤트에 대해서 이를 수신하여 자신의 정책을 처리하도록 PolicyHandler 를 구현한다
+- 포인트 서비스에서는 배송 이벤트에 대해서 이를 수신하여 자신의 정책을 처리하도록 PolicyHandler 를 구현한다
 
 ```
 package carshare;
@@ -325,16 +325,20 @@ package carshare;
 @Service
 public class PolicyHandler{
 
-   @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverPaid_Ship(@Payload Paid paid){
+    @Autowired
+    PointRepository pointRepository;
 
-        if(paid.isMe()){
-            Delivery delivery = new Delivery();
-            delivery.setOrderId(paid.getOrderId());
-            delivery.setPaymentId(paid.getId());
-            delivery.setStatus("Shipped");
+    @StreamListener(KafkaProcessor.INPUT)
+    public void wheneverShipped_PointCancel(@Payload Shipped shipped){
 
-            deliveryRepository.save(delivery) ;
+        if(shipped.isMe()){
+            Point point = new Point();
+            point.setOrderId(shipped.getOrderId());
+            point.setPaymentId(shipped.getPaymentId());
+            point.setDeliveryId(shipped.getId());
+            point.setStatus("offered");
+
+            pointRepository.save(point) ;
         }
     }
 
@@ -342,24 +346,24 @@ public class PolicyHandler{
 
 ```
 
-배송 서비스는 접수/결제 서비스와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 배송 서비스가 유지보수로 인해 잠시 내려간 상태라도 접수신청을 받는데 문제가 없다.
+포인트 서비스는 배송 서비스와 완전히 분리되어있으며, 이벤트 수신에 따라 처리되기 때문에, 포인트 서비스가 유지보수로 인해 잠시 내려간 상태라도 접수신청을 받는데 문제가 없다.
 
 ```
-#배송(delivery) 서비스를 잠시 내려놓음 (ctrl+c)
+#포인트(point) 서비스를 잠시 내려놓음 (ctrl+c)
 
-#접수요청 처리
-http localhost:8081/orders productId=1003 qty=2 status="order"   #Success
-http localhost:8081/orders productId=1004 qty=4 status="order"   #Success
+#배송처리 처리
+http localhost:8081/delivery productId=1 qty=10 status="order"   #Success
+http localhost:8081/delivery productId=2 qty=20 status="order"   #Success
 
 #접수상태 확인
-http localhost:8081/orders     # 주문상태 안바뀜 확인
+http localhost:8081/orders...     # 배송상태 안바뀜 확인
 
 #배송 서비스 기동
-cd carsharedelivery
+cd point
 mvn spring-boot:run
 
 #접수상태 확인
-http localhost:8081/orders     # 접수상태가 "shipped(배송됨)"으로 확인
+http localhost:8081/orders     # 접수상태가 "offerd(제공됨)"으로 확인
 ```
 
 # 운영
