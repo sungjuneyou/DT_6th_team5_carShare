@@ -382,19 +382,19 @@ Git Hook 설정으로 연결된 GitHub의 소스 변경 발생 시 자동 배포
 kubectl label namespace carshare istio-injection=enabled 
 ```
 
-* 서킷 브레이커 pending time 설정
-![image](https://user-images.githubusercontent.com/70302900/96588904-27592680-131f-11eb-94dc-2b61b67c3ce2.png)
-
+* 서비스 대기열 조절로 장애 사전 예방 - istio destination rule
 ![image](https://user-images.githubusercontent.com/47113630/97906047-57281580-1d86-11eb-95c7-99f89da3bf14.png)
+  - 컨넥션풀 대기열 1개로 제한
+  - 컨넥션당 서비스 1개로 제한
 
-
-* 부하테스트 툴(Siege) 설치 및 Order 서비스 Load Testing 
+* 부하테스트 툴(Siege) 설치 및 delivery 서비스 Load Testing 
   - 동시 사용자 5명
   - 2초 실행 
 ![image](https://user-images.githubusercontent.com/70302900/96588949-38099c80-131f-11eb-9e37-5f1846fca268.png)
 
 
 * 키알리(kiali)화면에 서킷브레이커 동작 확인
+
 ![image](https://user-images.githubusercontent.com/70302900/96589002-46f04f00-131f-11eb-92b7-dd13ce203382.png)
 
 
