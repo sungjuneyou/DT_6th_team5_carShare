@@ -384,7 +384,8 @@ kubectl label namespace carshare istio-injection=enabled
 
 * 서킷 브레이커 pending time 설정
 ![image](https://user-images.githubusercontent.com/70302900/96588904-27592680-131f-11eb-94dc-2b61b67c3ce2.png)
-docker push 233152371630.dkr.ecr.ap-northeast-2.amazonaws.com/skccuser30-carshare-delivery:v1
+
+![image](https://user-images.githubusercontent.com/47113630/97906047-57281580-1d86-11eb-95c7-99f89da3bf14.png)
 
 
 * 부하테스트 툴(Siege) 설치 및 Order 서비스 Load Testing 
